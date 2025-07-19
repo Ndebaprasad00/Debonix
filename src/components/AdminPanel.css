@@ -1,0 +1,54 @@
+.admin-panel {
+  margin-top: 80px; /* Space for fixed navbar */
+  padding: 30px;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #eef2f3, #cfd9df);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-panel h1 {
+  color: #333;
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.admin-section {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.admin-section h2 {
+  font-size: 22px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.admin-section p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.admin-btn {
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.admin-btn:hover {
+  background: linear-gradient(to right, #3e42a1, #7a80e2);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}

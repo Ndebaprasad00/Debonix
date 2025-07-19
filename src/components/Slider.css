@@ -1,0 +1,39 @@
+/* src/components/Slider.css */
+.slider-container {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-inner {
+  display: flex;
+  flex-direction: column;
+  height: 400vh; /* 4 slides x 100vh */
+  animation: slide-vertical 16s infinite;
+}
+
+.slide {
+  height: 100vh;
+  width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Animation: slide every 4s smoothly */
+@keyframes slide-vertical {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(0); }
+
+  30% { transform: translateY(-100vh); }
+  50% { transform: translateY(-100vh); }
+
+  55% { transform: translateY(-200vh); }
+  75% { transform: translateY(-200vh); }
+
+  80% { transform: translateY(-300vh); }
+  100% { transform: translateY(-300vh); }
+}
