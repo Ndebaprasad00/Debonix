@@ -1,0 +1,40 @@
+.cart-container {
+  position: fixed;
+  top: 20%;
+  right: 20%;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cart-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.close-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 30%;
+}
+
+.close-btn:hover {
+  background: #d32f2f;
+}

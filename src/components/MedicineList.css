@@ -1,0 +1,78 @@
+.medicine-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.medicine-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.medicine-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.medicine-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.medicine-card:hover {
+  transform: scale(1.03);
+}
+
+.medicine-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.price {
+  display: block;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.add-to-cart-btn {
+  margin-top: 10px;
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #388e3c;
+}
+
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

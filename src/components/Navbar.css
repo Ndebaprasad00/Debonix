@@ -1,6 +1,6 @@
 /* src/components/Navbar.css */
 
-.navbar {
+/* .navbar {
     position: fixed; 
   display: flex;
   justify-content: space-between;
@@ -11,6 +11,20 @@
   position: relative;
   z-index: 999;  
   top: 0;  
+} */
+
+.navbar {
+  position: fixed;       /* Keeps navbar fixed */
+  top: 0;                /* Sticks to top */
+  left: 0;
+  width: 100%;           /* Full width */
+  background-color: #1e1e2f;
+  /* padding: 10px 0px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;         /* Keeps navbar above other content */
 }
 
 /* .navbar {
@@ -48,11 +62,12 @@
 .nav-logo {
   display: flex;
   align-items: center;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
   cursor: pointer;
   animation: pulseLogo 2.5s infinite ease-in-out;
   transition: transform 0.3s ease;
+  padding: 16px;
 }
 
 .logo-icon {
@@ -97,6 +112,7 @@
   display: flex;
   align-items: center;
   gap: 25px;
+  padding: 16px;
 }
 
 .nav-links a {

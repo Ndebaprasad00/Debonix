@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { FaBars, FaTimes, FaUserCircle, FaRocket } from "react-icons/fa";
 import { useLocation, Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ cartCount, onCartClick }) => {
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/admin");
 
@@ -105,17 +105,40 @@ const Navbar = () => {
         </div>
 
         <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <a href="/" className={activeSection === "home" ? "active" : ""}>Home</a>
-          <a href="#about" className={activeSection === "about" ? "active" : ""}>About</a>
-          <a href="#services" className={activeSection === "services" ? "active" : ""}>Services</a>
-          <a href="#contact" className={activeSection === "contact" ? "active" : ""}>Contact</a>
+          <a href="/" className={activeSection === "home" ? "active" : ""}>
+            Home
+          </a>
+          {/* <a
+            href="#about"
+            className={activeSection === "about" ? "active" : ""}
+          >
+            About
+          </a>
+          <a
+            href="#services"
+            className={activeSection === "services" ? "active" : ""}
+          >
+            Services
+          </a>
+          <a
+            href="#contact"
+            className={activeSection === "contact" ? "active" : ""}
+          >
+            Contact
+          </a> */}
+
+          <button className="cart-btn" onClick={onCartClick}>
+            🛒 Cart ({cartCount})
+          </button>
 
           {isLoggedIn && isAdmin && (
-            <Link to="/admin" className="admin-link">Admin Panel</Link>
+            <Link to="/admin" className="admin-link">
+              Admin Panel
+            </Link>
           )}
 
-          {!isAdminPage && (
-            isLoggedIn ? (
+          {!isAdminPage &&
+            (isLoggedIn ? (
               <div
                 className="nav-dropdown"
                 onMouseEnter={() => setDropdownOpen(true)}
@@ -128,17 +151,18 @@ const Navbar = () => {
                   <div className="dropdown-menu">
                     <a href="/profile">My Account</a>
                     <a href="/settings">Settings</a>
-                    <a href="#logout" onClick={handleLogout}>Logout</a>
+                    <a href="#logout" onClick={handleLogout}>
+                      Logout
+                    </a>
                   </div>
                 )}
               </div>
             ) : (
               <div className="auth-buttons">
                 <button onClick={() => setShowLogin(true)}>Login</button>
-                <button onClick={() => setShowRegister(true)}>Register</button>
+                {/* <button onClick={() => setShowRegister(true)}>Register</button> */}
               </div>
-            )
-          )}
+            ))}
         </div>
 
         <div className="nav-toggle" onClick={() => setMenuOpen(!menuOpen)}>
@@ -148,23 +172,42 @@ const Navbar = () => {
 
       {/* Login Modal */}
       {showLogin && (
-        <div className="modal-overlay fancy" onClick={() => setShowLogin(false)}>
+        <div
+          className="modal-overlay fancy"
+          onClick={() => setShowLogin(false)}
+        >
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <span className="close-btn" onClick={() => setShowLogin(false)}>&times;</span>
+            <span className="close-btn" onClick={() => setShowLogin(false)}>
+              &times;
+            </span>
             <div className="modal-header login">
               <h2>Welcome Back 👋</h2>
               <p>Login to continue exploring</p>
             </div>
             <div className="modal-body">
-              <input type="email" placeholder="📧 Email" className="modal-input" />
-              <input type="password" placeholder="🔒 Password" className="modal-input" />
-              <button className="modal-btn" onClick={handleLogin}>Login</button>
+              <input
+                type="email"
+                placeholder="📧 Email"
+                className="modal-input"
+              />
+              <input
+                type="password"
+                placeholder="🔒 Password"
+                className="modal-input"
+              />
+              <button className="modal-btn" onClick={handleLogin}>
+                Login
+              </button>
               <p className="switch-text">
                 Don't have an account?{" "}
-                <span onClick={() => {
-                  setShowLogin(false);
-                  setShowRegister(true);
-                }}>Register Now</span>
+                <span
+                  onClick={() => {
+                    setShowLogin(false);
+                    setShowRegister(true);
+                  }}
+                >
+                  Register Now
+                </span>
               </p>
             </div>
           </div>
@@ -173,9 +216,14 @@ const Navbar = () => {
 
       {/* Register Modal */}
       {showRegister && (
-        <div className="modal-overlay fancy" onClick={() => setShowRegister(false)}>
+        <div
+          className="modal-overlay fancy"
+          onClick={() => setShowRegister(false)}
+        >
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <span className="close-btn" onClick={() => setShowRegister(false)}>&times;</span>
+            <span className="close-btn" onClick={() => setShowRegister(false)}>
+              &times;
+            </span>
             <div className="modal-header register">
               <h2>Join Us Today 🎉</h2>
               <p>Create your account below</p>
@@ -202,13 +250,19 @@ const Navbar = () => {
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
               />
-              <button className="modal-btn" onClick={handleRegisterSubmit}>Register</button>
+              <button className="modal-btn" onClick={handleRegisterSubmit}>
+                Register
+              </button>
               <p className="switch-text">
                 Already have an account?{" "}
-                <span onClick={() => {
-                  setShowRegister(false);
-                  setShowLogin(true);
-                }}>Login Here</span>
+                <span
+                  onClick={() => {
+                    setShowRegister(false);
+                    setShowLogin(true);
+                  }}
+                >
+                  Login Here
+                </span>
               </p>
             </div>
           </div>

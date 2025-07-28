@@ -1,19 +1,22 @@
-/* src/components/Slider.css */
+/* ===== Slider Container ===== */
 .slider-container {
-  height: 100vh;
+  height: 50vh; /* Reduced from 100vh */
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 
+/* ===== Inner Slider ===== */
 .slider-inner {
   display: flex;
   flex-direction: column;
-  height: 400vh; /* 4 slides x 100vh */
+  height: 200vh; /* 4 slides × 50vh each */
   animation: slide-vertical 16s infinite;
 }
 
+/* ===== Each Slide ===== */
 .slide {
-  height: 100vh;
+  height: 50vh; /* Reduced height */
   width: 100%;
 }
 
@@ -21,19 +24,48 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.5s ease-in-out;
 }
 
-/* Animation: slide every 4s smoothly */
+.slide img:hover {
+  transform: scale(1.02);
+}
+
+/* ===== Animation: vertical sliding ===== */
 @keyframes slide-vertical {
   0% { transform: translateY(0); }
   25% { transform: translateY(0); }
 
-  30% { transform: translateY(-100vh); }
-  50% { transform: translateY(-100vh); }
+  30% { transform: translateY(-50vh); }
+  50% { transform: translateY(-50vh); }
 
-  55% { transform: translateY(-200vh); }
-  75% { transform: translateY(-200vh); }
+  55% { transform: translateY(-100vh); }
+  75% { transform: translateY(-100vh); }
 
-  80% { transform: translateY(-300vh); }
-  100% { transform: translateY(-300vh); }
+  80% { transform: translateY(-150vh); }
+  100% { transform: translateY(-150vh); }
+}
+
+/* ===== Navigation Dots ===== */
+.slider-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dot.active {
+  background: #4caf50;
 }

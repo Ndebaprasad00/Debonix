@@ -23,6 +23,11 @@
   color: #0072ff;
 }
 
+.medicine-section p {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
 .about-section p {
   font-size: 18px;
   line-height: 1.8;
