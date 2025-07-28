@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { FaBars, FaTimes, FaUserCircle, FaRocket } from "react-icons/fa";
 import { useLocation, Link } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 
-const Navbar = ({ cartCount, onCartClick }) => {
+const Navbar = ({ cartCount, onCartClick, onSearch }) => {
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/admin");
 
@@ -18,6 +19,7 @@ const Navbar = ({ cartCount, onCartClick }) => {
   const [registerName, setRegisterName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const loggedIn = sessionStorage.getItem("loggedIn") === "true";
@@ -28,7 +30,7 @@ const Navbar = ({ cartCount, onCartClick }) => {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    setIsAdmin(false); // 🔁 Assume normal user
+    setIsAdmin(false);
     sessionStorage.setItem("loggedIn", "true");
     sessionStorage.setItem("isAdmin", "false");
     setShowLogin(false);
@@ -57,7 +59,7 @@ const Navbar = ({ cartCount, onCartClick }) => {
       if (res.ok) {
         alert("✅ " + data.message);
         setIsLoggedIn(true);
-        const isAdminUser = data.role === "admin"; // 🔁 Adjust based on your backend
+        const isAdminUser = data.role === "admin";
         setIsAdmin(isAdminUser);
         sessionStorage.setItem("loggedIn", "true");
         sessionStorage.setItem("isAdmin", isAdminUser ? "true" : "false");
@@ -96,6 +98,10 @@ const Navbar = ({ cartCount, onCartClick }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleSearch = () => {
+    if (onSearch) onSearch(searchTerm);
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -104,39 +110,39 @@ const Navbar = ({ cartCount, onCartClick }) => {
           <span className="logo-text">Debonix</span>
         </div>
 
+        {/* 🔎 Search Bar */}
+        <div className="nav-search">
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search medicines..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          <button className="search-btn" onClick={handleSearch}>
+            Search
+          </button>
+        </div>
+
         <div className={`nav-links ${menuOpen ? "active" : ""}`}>
           <a href="/" className={activeSection === "home" ? "active" : ""}>
             Home
           </a>
-          {/* <a
-            href="#about"
-            className={activeSection === "about" ? "active" : ""}
-          >
-            About
-          </a>
-          <a
-            href="#services"
-            className={activeSection === "services" ? "active" : ""}
-          >
-            Services
-          </a>
-          <a
-            href="#contact"
-            className={activeSection === "contact" ? "active" : ""}
-          >
-            Contact
-          </a> */}
 
+          {/* 🛒 Cart */}
           <button className="cart-btn" onClick={onCartClick}>
             🛒 Cart ({cartCount})
           </button>
 
+          {/* 🔑 Admin Panel Link */}
           {isLoggedIn && isAdmin && (
             <Link to="/admin" className="admin-link">
               Admin Panel
             </Link>
           )}
 
+          {/* 👤 Profile or Login */}
           {!isAdminPage &&
             (isLoggedIn ? (
               <div
@@ -160,7 +166,6 @@ const Navbar = ({ cartCount, onCartClick }) => {
             ) : (
               <div className="auth-buttons">
                 <button onClick={() => setShowLogin(true)}>Login</button>
-                {/* <button onClick={() => setShowRegister(true)}>Register</button> */}
               </div>
             ))}
         </div>
@@ -170,7 +175,7 @@ const Navbar = ({ cartCount, onCartClick }) => {
         </div>
       </nav>
 
-      {/* Login Modal */}
+      {/* 🔐 Login Modal */}
       {showLogin && (
         <div
           className="modal-overlay fancy"
@@ -214,7 +219,7 @@ const Navbar = ({ cartCount, onCartClick }) => {
         </div>
       )}
 
-      {/* Register Modal */}
+      {/* 📝 Register Modal */}
       {showRegister && (
         <div
           className="modal-overlay fancy"

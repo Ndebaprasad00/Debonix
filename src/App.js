@@ -7,19 +7,20 @@ import Slider from "./components/Slider";
 // import AdminPanel from "./components/AdminPanel";
 import MedicineList from "./components/MedicineList";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 import "./App.css";
 
 function App() {
-  const [cartItems, setCartItems] = useState([]); // Store added medicines
+  const [cartItems, setCartItems] = useState([]); 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Handle adding items to cart
+  // Add medicine to cart
   const handleAddToCart = (medicine) => {
     setCartItems((prev) => [...prev, medicine]);
   };
 
-  // Open/close cart popup
+  // Open Cart
   const handleCartClick = () => {
     setIsCartOpen(true);
   };
@@ -27,18 +28,17 @@ function App() {
   return (
     <Router>
       <div>
-        {/* Navbar with cart count */}
+        {/* Navbar with Cart Count */}
         <Navbar cartCount={cartItems.length} onCartClick={handleCartClick} />
 
         <Routes>
+          {/* Home Page */}
           <Route
             path="/"
             element={
               <>
                 <Slider />
-
                 <section id="medicine" className="medicine-section">
-                  {/* Pass add to cart handler */}
                   <MedicineList onAddToCart={handleAddToCart} />
                 </section>
 
@@ -68,6 +68,12 @@ function App() {
             }
           />
 
+          {/* Checkout Page */}
+          <Route
+            path="/checkout"
+            element={<Checkout cartItems={cartItems} />}
+          />
+
           {/* Admin Protected Route */}
           <Route
             path="/admin"
@@ -82,7 +88,10 @@ function App() {
 
         {/* Cart Popup */}
         {isCartOpen && (
-          <Cart cartItems={cartItems} onClose={() => setIsCartOpen(false)} />
+          <Cart 
+            cartItems={cartItems} 
+            onClose={() => setIsCartOpen(false)} 
+          />
         )}
       </div>
     </Router>

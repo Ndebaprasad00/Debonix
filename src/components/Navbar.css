@@ -361,3 +361,124 @@
     background: rgba(0, 0, 0, 0.6);
   }
 }
+
+/* .nav-search {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  padding: 5px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-search:hover {
+  border-color: #4caf50;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.15);
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  flex: 1;
+  padding: 5px 10px;
+  min-width: 180px;
+}
+
+.search-btn {
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s;
+}
+
+.search-btn:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.search-btn svg {
+  font-size: 16px;
+} */
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  padding: 6px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.nav-search:focus-within {
+  border-color: #4caf50;
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.2);
+  transform: scale(1.02);
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  flex: 1;
+  padding: 6px 12px 6px 35px;
+  width: 180px;
+  transition: width 0.4s ease-in-out;
+  color: #333;
+}
+
+.nav-search:focus-within .search-input {
+  width: 250px; /* expands on focus */
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  color: #888;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.nav-search:hover .search-icon,
+.nav-search:focus-within .search-icon {
+  color: #4caf50;
+}
+
+.search-btn {
+  background: linear-gradient(135deg, #4caf50, #43a047);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.search-btn:hover {
+  background: linear-gradient(135deg, #43a047, #388e3c);
+  transform: scale(1.05);
+}
+
+.search-btn svg {
+  font-size: 16px;
+}

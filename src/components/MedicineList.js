@@ -8,9 +8,25 @@ const MedicineList = ({ onAddToCart }) => {
   const medicinesPerPage = 8;
 
   useEffect(() => {
+    // First fetch from dummy API and store in DB
     fetch("https://dummyjson.com/products?limit=30")
       .then((res) => res.json())
-      .then((data) => setMedicines(data.products))
+      .then((data) => {
+        // Store in DB
+        fetch("http://localhost/pharma_backend/store_medicines.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data.products),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            // After storing, fetch from DB
+            fetch("http://localhost/pharma_backend/get_medicines.php")
+              .then((res) => res.json())
+              .then((dbData) => setMedicines(dbData));
+          })
+          .catch((error) => console.error("Error storing medicines:", error));
+      })
       .catch((error) => console.error("Error fetching medicines:", error));
   }, []);
 
@@ -23,23 +39,15 @@ const MedicineList = ({ onAddToCart }) => {
 
   const totalPages = Math.ceil(medicines.length / medicinesPerPage);
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
-
   return (
     <div className="medicine-container">
       <h2 className="medicine-title">Medicines</h2>
       <div className="medicine-cards">
         {currentMedicines.map((medicine) => (
           <div key={medicine.id} className="medicine-card">
-            <img src={medicine.thumbnail} alt={medicine.title} />
-            <h3>{medicine.title}</h3>
-            <p>{medicine.description.slice(0, 50)}...</p>
+            <img src={medicine.image} alt={medicine.name} />
+            <h3>{medicine.name}</h3>
+            <p>{medicine.composition.slice(0, 50)}...</p>
             <span className="price">₹{medicine.price}</span>
             <button
               className="add-to-cart-btn"
@@ -52,13 +60,19 @@ const MedicineList = ({ onAddToCart }) => {
       </div>
 
       <div className="pagination">
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+        <button
+          onClick={() => setCurrentPage((p) => p - 1)}
+          disabled={currentPage === 1}
+        >
           Prev
         </button>
         <span>
           Page {currentPage} of {totalPages}
         </span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        <button
+          onClick={() => setCurrentPage((p) => p + 1)}
+          disabled={currentPage === totalPages}
+        >
           Next
         </button>
       </div>
